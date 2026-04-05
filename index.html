@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nithiya B - Portfolio</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
@@ -45,7 +45,7 @@
         <section id="home" class="section hero">
             <div class="hero-content fade-in">
                 <p class="greeting">Hello, I'm</p>
-                <h1 class="glitch" data-text="NITHIYA B">NITHIYA B</h1>
+                <h1 class="bloom-text">NITHIYA B</h1>
                 <h2 class="role">I'm a <span class="typing-text"></span><span class="cursor-blink">|</span></h2>
                 <p class="summary">Adaptable and initiative-driven Software Development Engineer with strong communication, teamwork, and problem-solving skills. Quick to learn, self-motivated, and committed to growth and delivering high-quality results.</p>
                 <div class="cta-group">
@@ -59,15 +59,18 @@
                 </div>
             </div>
             <div class="hero-visual fade-in">
-                <div class="glass-cube-container">
+                <div class="glass-cube-container" style="position: relative;">
+                    <div class="cube-core">
+                        <img src="NITHI-1.png" alt="Nithi 1" class="core-card pos-left">
+                        <img src="NITHI-2.png" alt="Nithi 2" class="core-card pos-right">
+                        <img src="NITHI-3.png" alt="Nithi 3" class="core-card pos-center">
+                    </div>
                     <div class="glass-cube">
-                        <div class="cube-core"><i class="fas fa-brain"></i></div>
-                        <div class="face front">AI/ML</div>
-                        <div class="face back">Data</div>
-                        <div class="face right">MERN</div>
-                        <div class="face left">FullStack</div>
-                        <div class="face top">Python</div>
-                        <div class="face bottom">Cloud</div>
+                        <div class="face petal-1"></div>
+                        <div class="face petal-2"></div>
+                        <div class="face petal-3"></div>
+                        <div class="face petal-4"></div>
+                        <div class="face petal-5"></div>
                     </div>
                 </div>
             </div>
@@ -354,9 +357,11 @@
                     </div>
                 </div>
                 
-                <form id="contact-form" class="contact-form" action="https://formsubmit.co/nithiyabaskarr@gmail.com" method="POST">
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_template" value="table">
+                <form id="contact-form" class="contact-form" action="https://formsubmit.co/nithiyabaskarr@gmail.com" method="POST" target="_blank">
+                    <!-- Security and routing settings for robust message fetching -->
+                    <input type="hidden" name="_captcha" value="true">
+                    <input type="hidden" name="_template" value="box">
+                    <input type="hidden" name="_subject" value="New message from portfolio viewer!">
                     <div class="form-group">
                         <input type="text" name="name" id="name" required placeholder="Your Name">
                     </div>

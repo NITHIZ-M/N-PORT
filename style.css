@@ -1,18 +1,28 @@
 :root {
   font-size: 15.2px; /* Scales entire site down by ~5% */
-  --bg-color: #06040d;
-  --bg-darker: #030207;
-  --primary-glow: rgba(139, 92, 246, 0.15);
-  --secondary-glow: rgba(249, 115, 22, 0.15);
-  --primary: #9b6dff;
-  --secondary: #ff8c3a;
-  --text-main: #f8fafc;
-  --text-muted: #9baac7;
-  --glass-bg: linear-gradient(135deg, rgba(25, 20, 45, 0.5) 0%, rgba(10, 8, 20, 0.8) 100%);
-  --glass-border: rgba(155, 109, 255, 0.2);
-  --glass-highlight: rgba(255, 140, 58, 0.5);
-  --gradient-primary: linear-gradient(135deg, #9b6dff, #df56ff);
-  --gradient-secondary: linear-gradient(135deg, #ff8c3a, #ff4c72);
+  /* Deepest pinkish-black background to let light gradients pop */
+  --bg-color: #0d0106;
+  --bg-darker: #050002; 
+  /* Ambient Glows */
+  --primary-glow: rgba(252, 40, 149, 0.2);
+  --secondary-glow: rgba(255, 182, 202, 0.15);
+  
+  /* Brand Constants */
+  --primary: #fc2895; /* Deep Pink */
+  --secondary: #ffb6ca; /* Baby Pink */
+  
+  /* Text Accents */
+  --text-main: #ffffff; /* White */
+  --text-muted: #ffdbe4;
+  
+  /* Core Panels */
+  --glass-bg: linear-gradient(135deg, rgba(252, 40, 149, 0.15) 0%, rgba(13, 1, 6, 0.8) 100%);
+  --glass-border: rgba(255, 182, 202, 0.3);
+  --glass-highlight: rgba(252, 40, 149, 0.6);
+  
+  /* Dynamic Paint - White to Baby Pink to Deep Pink */
+  --gradient-primary: linear-gradient(135deg, #ffffff 0%, #ffb6ca 45%, #fc2895 100%);
+  --gradient-secondary: linear-gradient(135deg, #ffb6ca 0%, #fc2895 50%, #ba0563 100%);
 }
 
 * {
@@ -23,7 +33,7 @@
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   background-color: var(--bg-color);
   color: var(--text-main);
   overflow-x: hidden;
@@ -91,7 +101,7 @@ p {
 
 /* Typography & Headings */
 h1, h2, h3, h4 {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Syne', sans-serif;
   font-weight: 700;
   line-height: 1.25;
   letter-spacing: -0.5px;
@@ -141,7 +151,7 @@ a {
 .logo {
   font-size: 1.8rem;
   font-weight: 800;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Syne', sans-serif;
   letter-spacing: -1px;
 }
 
@@ -345,7 +355,7 @@ a {
   font-weight: 600;
   cursor: none;
   border: none;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Syne', sans-serif;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 0.9rem;
@@ -414,25 +424,21 @@ a {
   color: var(--primary); font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 1rem;
 }
 
-.glitch {
-  font-size: 5rem; margin-bottom: 0.5rem; position: relative; display: inline-block;
-  color: var(--text-main); text-shadow: 0 5px 15px rgba(0,0,0,0.5); letter-spacing: -2px;
+.bloom-text {
+  position: relative; font-family: 'Syne', sans-serif; font-weight: 800;
+  font-size: clamp(3rem, 10vw, 5rem); /* Flawless fluid responsive scaling */
+  white-space: nowrap; /* Forces rigid horizontal line bounds natively */
+  color: transparent;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: sakuraBloom 3s ease-in-out infinite alternate;
+  margin-bottom: 0.5rem; letter-spacing: -2px;
 }
 
-.glitch::before, .glitch::after {
-  content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.8;
-}
-.glitch::before {
-  left: 2px; text-shadow: -2px 0 red; clip: rect(24px, 550px, 90px, 0); animation: glitch-anim 3s infinite linear alternate-reverse;
-}
-.glitch::after {
-  left: -2px; text-shadow: -2px 0 blue; clip: rect(85px, 550px, 140px, 0); animation: glitch-anim 2s infinite linear alternate-reverse;
-}
-
-@keyframes glitch-anim {
-  0% { clip: rect(10px, 9999px, 80px, 0); } 20% { clip: rect(90px, 9999px, 10px, 0); }
-  40% { clip: rect(30px, 9999px, 100px, 0); } 60% { clip: rect(60px, 9999px, 20px, 0); }
-  80% { clip: rect(10px, 9999px, 90px, 0); } 100% { clip: rect(70px, 9999px, 30px, 0); }
+@keyframes sakuraBloom {
+    0% { filter: drop-shadow(0 0 10px rgba(252, 40, 149, 0.2)); transform: scale(1); }
+    100% { filter: drop-shadow(0 0 25px rgba(255, 182, 202, 0.8)); transform: scale(1.02); }
 }
 
 .role { font-size: 2.2rem; color: var(--text-muted); margin-bottom: 1.5rem; }
@@ -463,49 +469,102 @@ a {
 
 .glass-cube {
   width: 100%; height: 100%; position: relative; transform-style: preserve-3d;
-  animation: rotateCube 24s infinite linear; transition: all 0.6s ease;
+  animation: rotateCube 48s infinite linear; transition: all 0.6s ease;
+  opacity: 0.55; /* Fuses all layered children uniformly into a single contiguous entity avoiding internal overlaps! */
 }
 
 .cube-core {
-   position: absolute; width: 120px; height: 120px; top: 50%; left: 50%;
-   margin-top: -60px; margin-left: -60px; background: var(--gradient-primary); border-radius: 50%;
-   display: flex; align-items: center; justify-content: center; font-size: 4rem; color: #fff;
-   box-shadow: 0 0 50px var(--primary), inset 0 0 20px rgba(255,255,255,0.5); opacity: 0;
-   transform: scale(0.3); transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+   position: absolute; width: 220px; height: 320px; top: 50%; left: 50%;
+   margin-top: -160px; margin-left: -110px;
+   display: flex; align-items: center; justify-content: center;
+   opacity: 0; pointer-events: none;
+   transform: scale(0.3); transition: all 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+   z-index: 10; transform-style: preserve-3d;
+}
+
+.core-card {
+   position: absolute; width: 100%; height: 100%; object-fit: cover;
+   border-radius: 20px; border: 2px solid rgba(255, 255, 255, 0.1);
+   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+   transition: all 0.9s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .face {
-  position: absolute; width: 280px; height: 280px;
-  background: linear-gradient(135deg, rgba(155, 109, 255, 0.15), rgba(255, 140, 58, 0.15));
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Outfit', sans-serif; font-size: 2.4rem; font-weight: 800; color: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-  box-shadow: inset 0 0 30px rgba(155, 109, 255, 0.3); border-radius: 10px;
-  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.8s ease;
+  position: absolute; width: 220px; height: 220px; top: 50%; left: 50%;
+  margin-top: -110px; margin-left: -110px; /* Perfect centered box */
+  background: linear-gradient(135deg, #ffdbe4, #fc2895); /* Swapped to pure solid vectors preventing add-up blending */
+  clip-path: polygon(
+      50% 100%, 35% 85%, 15% 65%, 0% 40%, 5% 20%, 
+      20% 5%, 38% 10%, 50% 25%, 62% 10%, 80% 5%, 
+      95% 20%, 100% 40%, 85% 65%, 65% 85%
+  );
+  transition: transform 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 1.2s ease;
 }
 
-.front  { transform: translateZ(140px); }
-.back   { transform: rotateY(180deg) translateZ(140px); }
-.right  { transform: rotateY(90deg) translateZ(140px); }
-.left   { transform: rotateY(-90deg) translateZ(140px); }
-.top    { transform: rotateX(90deg) translateZ(140px); }
-.bottom { transform: rotateX(-90deg) translateZ(140px); }
+/* Authentic Botanical 5-Petal Sakura Core Structure */
+.petal-1 { transform: rotateZ(0deg) translateY(-75px); }
+.petal-2 { transform: rotateZ(72deg) translateY(-75px); }
+.petal-3 { transform: rotateZ(144deg) translateY(-75px); }
+.petal-4 { transform: rotateZ(216deg) translateY(-75px); }
+.petal-5 { transform: rotateZ(288deg) translateY(-75px); }
 
 /* Exploding Hover Transformation */
 .hero-visual:hover .cube-core {
-   opacity: 1; transform: scale(1.1); box-shadow: 0 0 100px var(--primary), inset 0 0 40px #fff;
+   opacity: 1; transform: scale(1.15); pointer-events: auto;
 }
-.hero-visual:hover .front  { transform: translateZ(240px) rotate(8deg); background: rgba(155, 109, 255, 0.05); border-color: var(--primary); }
-.hero-visual:hover .back   { transform: rotateY(180deg) translateZ(240px) rotate(-8deg); background: rgba(155, 109, 255, 0.05); border-color: var(--primary); }
-.hero-visual:hover .right  { transform: rotateY(90deg) translateZ(240px) rotate(-8deg); background: rgba(255, 140, 58, 0.05); border-color: var(--secondary); }
-.hero-visual:hover .left   { transform: rotateY(-90deg) translateZ(240px) rotate(8deg); background: rgba(255, 140, 58, 0.05); border-color: var(--secondary); }
-.hero-visual:hover .top    { transform: rotateX(90deg) translateZ(240px) rotate(8deg); background: rgba(155, 109, 255, 0.05); border-color: center; }
-.hero-visual:hover .bottom { transform: rotateX(-90deg) translateZ(240px) rotate(-8deg); background: rgba(255, 140, 58, 0.05); border-color: center; }
+.hero-visual:hover .pos-left {
+   transform: translateX(-160px) rotate(-12deg); z-index: 1; opacity: 0.85; filter: brightness(0.5);
+}
+.hero-visual:hover .pos-right {
+   transform: translateX(160px) rotate(12deg); z-index: 2; opacity: 0.85; filter: brightness(0.5);
+}
+.hero-visual:hover .pos-center {
+   transform: translateZ(60px) scale(1.1); z-index: 5;
+   box-shadow: 0 15px 40px rgba(155, 109, 255, 0.6); border-color: rgba(155, 109, 255, 0.5);
+}
+
+/* Flat Fanning Radial Explosion of the Top-View Petals */
+.hero-visual:hover .petal-1 { transform: rotateZ(0deg) translateY(-320px) scale(0.5); opacity: 0; }
+.hero-visual:hover .petal-2 { transform: rotateZ(72deg) translateY(-320px) scale(0.5); opacity: 0; }
+.hero-visual:hover .petal-3 { transform: rotateZ(144deg) translateY(-320px) scale(0.5); opacity: 0; }
+.hero-visual:hover .petal-4 { transform: rotateZ(216deg) translateY(-320px) scale(0.5); opacity: 0; }
+.hero-visual:hover .petal-5 { transform: rotateZ(288deg) translateY(-320px) scale(0.5); opacity: 0; }
 
 @keyframes rotateCube {
-  0% { transform: rotateX(0deg) rotateY(0deg); }
-  100% { transform: rotateX(360deg) rotateY(360deg); }
+  0% { transform: rotateZ(0deg); }
+  100% { transform: rotateZ(360deg); } /* Rotates flat flower perfectly evenly on XY plane */
+}
+
+/* Background Falling Sakura Container */
+.sakura-container {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: 0; /* Placed visibly immediately above background, beneath layout bounds */
+    overflow: hidden;
+}
+
+.sakura-falling {
+    position: absolute;
+    top: -15vh;
+    background: linear-gradient(135deg, rgba(255, 182, 202, 1), rgba(252, 40, 149, 0.8));
+    border-radius: 50% 0 50% 0; /* Petal droplet hack */
+    box-shadow: 0 4px 15px rgba(252, 40, 149, 0.5);
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0vh) rotate3d(1, 1, 0, 0deg) translateX(0) scale(1);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(115vh) rotate3d(1, 1, 0.2, 1080deg) translateX(var(--drift));
+        opacity: 0;
+    }
 }
 
 /* About Grid */
@@ -717,18 +776,17 @@ footer p { color: var(--text-muted); font-size: 1.15rem; }
 
 /* Responsive adjustments */
 @media (max-width: 992px) {
-  .hero { flex-direction: column; text-align: center; padding-top: 8rem; }
-  .hero-content { margin-bottom: 5rem; }
-  .hero-visual { padding-bottom: 2rem; }
+  .hero { flex-direction: column; text-align: center; padding-top: 6rem; }
+  .hero-content { margin-bottom: 2rem; }
+  .hero-visual { padding-bottom: 2rem; transform: scale(0.9); }
   .cta-group, .social-links { justify-content: center; }
   .split-grid, .contact-container { grid-template-columns: 1fr; }
-  .contact-info { flex-direction: row; flex-wrap: wrap; justify-content: center;gap:2rem; }
+  .contact-info { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 2rem; }
   .glass-panel { padding: 2rem; }
   .section-header h2 { font-size: 3rem; }
 }
 
 @media (max-width: 768px) {
-  .glitch { font-size: 3.8rem; }
   .section-header h2 { font-size: 2.6rem; }
   .nav-links {
     position: fixed; top: 0; right: -100%; width: 280px; height: 100vh;
@@ -737,9 +795,12 @@ footer p { color: var(--text-muted); font-size: 1.15rem; }
   }
   .nav-links.nav-active { right: 0; }
   .menu-toggle { display: block; z-index: 1001; }
-  .glass-cube-container { width: 220px; height: 220px; }
-  .face { width: 220px; height: 220px; font-size: 1.8rem; }
-  .front { transform: translateZ(110px); } .back { transform: rotateY(180deg) translateZ(110px); }
-  .right { transform: rotateY(90deg) translateZ(110px); } .left { transform: rotateY(-90deg) translateZ(110px); }
-  .top { transform: rotateX(90deg) translateZ(110px); } .bottom { transform: rotateX(-90deg) translateZ(110px); }
+  .hero-visual { transform: scale(0.75); margin-top: -20px; } /* Scales unified physics structure optimally */
+}
+
+@media (max-width: 480px) {
+  .hero-visual { transform: scale(0.55); margin-top: -40px; } /* Scales for miniature portraits seamlessly */
+  .section { padding: 6rem 0 3rem; }
+  .glass-panel { padding: 1.5rem; }
+  .cert-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
 }
